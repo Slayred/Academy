@@ -31,6 +31,7 @@ public class Mda10 {
 		}
 		
 		
+		
 /*		for(int i = 0; i <= ar.length-1; i++) { // for array
 			for (int j = 0; j <= ar[i].length -1; j++) {
 
