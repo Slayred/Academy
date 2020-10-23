@@ -10,6 +10,10 @@ public class Mda10 {
 		int k = 0;
 		int x = 0;
 		int o = 0;
+		int wins = 0;
+		int row1 = 0;
+		int row2 =0;
+		int horres = 0;
 		int countx = 0;
 		int counto = 0;
 		int counte = 0;
@@ -39,15 +43,39 @@ public class Mda10 {
 				} else if (ar[i][j] == 'O') {
 					counto += 'O';
 				} else { counte++;}
-		}
-	}
-		
-		if (( Math.abs((countx)/'X') - (counto)/'O') > 1) {
-			System.out.println("Impossible");
-		} else if (counto > 1) {
-			System.out.print("not finished");
+			}
 		}
 		
+
+		//horizontal
+		for (int i = 0; i <= ar.length-1; i++) {
+			int hor = ar[i][0] + ar[i][1] + ar[i][2];
+			if (hor == 264) {
+				horres = 1;
+				wins++;
+			}else if (hor == 237) {
+				horres = 2;
+				wins++;				
+			}
+		}
+		//vertical
+		for (int i = 0; i <= ar.length-1;i++) {
+			int vert = ar[0][i] + ar[1][i] + ar[2][i];
+			if (vert == 264) {
+				horres = 1;
+				wins++;
+			}else if (vert == 237) {
+				horres = 2;
+				wins++;			
+			}
+		}
+		//\
+		for (int i = 0; i <=ar.length-1;i++) {
+			row1 += ar[i][i];
+		}
+		for (int i = 0;i <= ar.length-1;i++) {
+			row2 += ar [i][Math.abs(i - ar.length+1)];
+		}
 		
 		
 /*		for(int i = 0; i <= ar.length-1; i++) { // for array
@@ -62,5 +90,16 @@ public class Mda10 {
 			}
 			System.out.println();
 		}
+		System.out.println((countx/'X') + " " + (counto/'O'));
+		System.out.println("Wins = " + wins);
+		if (((( Math.abs((countx/'X') - (counto)/'O'))) > 1) || (wins > 1)) {
+			System.out.println("Impossible");
+			} else if ((horres == 1) || (( row1 == 264) || (row2 == 264))) {
+				System.out.print("X wins");
+			} else if ((horres == 2) || ((row1 == 237) || (row2 == 237))) {
+				System.out.print("O wins");				
+			} else if (counte > 0) {
+				System.out.print("Game not finished");
+			} else {System.out.print("Draw");}
 	}
 }
