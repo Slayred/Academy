@@ -44,6 +44,8 @@ public class Mda10 {
 		
 		if (( Math.abs((countx)/'X') - (counto)/'O') > 1) {
 			System.out.println("Impossible");
+		} else if (counto > 1) {
+			System.out.print("not finished");
 		}
 		
 		
