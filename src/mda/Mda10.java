@@ -10,13 +10,16 @@ public class Mda10 {
 		int k = 0;
 		int x = 0;
 		int o = 0;
+		int countx = 0;
+		int counto = 0;
+		int counte = 0;
 		for(int i = 0; i <= ar.length-1; i++) {
 			for (int j = 0; j <= ar[i].length -1; j++) {
 				ar[i][j] = inp.charAt(k);
 				k++;
 			}
 		}
-		for(int i = 0; i <= ar.length-1; i++) { // for array
+		/*for(int i = 0; i <= ar.length-1; i++) { // for array
 			for (int j = 0; j <= ar[i].length -1; j++) {
 				if (ar[i][j] == 'X') {
 					x++;
@@ -28,6 +31,19 @@ public class Mda10 {
 				System.out.println("Impossible");
 				break;
 			}
+		}*/
+		for(int i = 0; i <= ar.length-1; i++) { // for array
+			for (int j = 0; j <= ar[i].length -1; j++) {
+				if ( ar[i][j] == 'X') {
+					countx += 'X';
+				} else if (ar[i][j] == 'O') {
+					counto += 'O';
+				} else { counte++;}
+		}
+	}
+		
+		if (( Math.abs((countx)/'X') - (counto)/'O') > 1) {
+			System.out.println("Impossible");
 		}
 		
 		
