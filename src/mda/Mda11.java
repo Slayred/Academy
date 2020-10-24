@@ -82,19 +82,43 @@ public class Mda11 {
 				System.out.print("Game not finished");
 			} else {System.out.print("Draw");}			
 	}
-	public static void input(char[][] ar) {
+	public static char[][] input(char[][] ar) {
 		System.out.print("Enter the coordinates:");
 		Scanner scan = new Scanner(System.in);
-		int a = scan.nextInt();
-		int b = scan.nextInt();
+		int q = 0;
+		int a = -1;
+		int b = -1;
 		
-	}
+	while (q == 0) {
+		if (!scan.hasNextInt()) {
+			System.out.println("You should enter numbers!");
+			System.out.print("Enter the coordinates:");
+			scan.nextLine();
+			continue;
+		} else {
+		a = scan.nextInt();
+		b = scan.nextInt();
+		}
+		if ((a>3) || (b>3)) {
+			System.out.println("Coordinates should be from 1 to 3!");
+			System.out.print("Enter the coordinates:");
+	} else if (ar[Math.abs(b-3)][a-1] == '_') {
+		System.out.print("a="  + a + " b="+b);
+		ar[Math.abs(b-3)][a-1] = 'X';
+		q = 1;
+	} else {
+		System.out.println("This cell is occupied! Choose another one!");
+		System.out.print("Enter the coordinates:");
+		}
+		}
+	return ar;
+}
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter cells: ");
 		String inp = scan.nextLine();
 		char[][] ar = new char[3][3];
 		int k = 0;
-		System.out.print("Enter cells: ");
 		for(int i = 0; i <= ar.length-1; i++) {
 			for (int j = 0; j <= ar[i].length -1; j++) {
 				ar[i][j] = inp.charAt(k);
