@@ -15,7 +15,7 @@ public class Mda11 {
 		}
 		System.out.println("---------");
 	}
-	public static void results(char[][] ar) {
+	public static int results(char[][] ar, int res) {
 		int x = 0;
 		int o = 0;
 		int wins = 0;
@@ -75,14 +75,17 @@ public class Mda11 {
 		if (((( Math.abs((countx/'X') - (counto)/'O'))) > 1) || (wins > 1)) {
 			System.out.println("Impossible");
 			} else if ((horres == 1) || (( row1 == 264) || (row2 == 264))) {
-				System.out.print("X wins");
+				res = 1;
 			} else if ((horres == 2) || ((row1 == 237) || (row2 == 237))) {
-				System.out.print("O wins");				
-			} else if (counte > 0) {
-				System.out.print("Game not finished");
-			} else {System.out.print("Draw");}			
+				//System.out.print("O wins");	
+				res = 2;
+			} else if (counte <= 0) {
+				//System.out.print("Draw");
+				res = 3;
+			} //else {System.out.print("Draw");}
+		return res;			
 	}
-	public static char[][] input(char[][] ar) {
+	public static char[][] input(char[][] ar, int m) {
 		System.out.print("Enter the coordinates:");
 		Scanner scan = new Scanner(System.in);
 		int q = 0;
@@ -102,10 +105,20 @@ public class Mda11 {
 		if ((a>3) || (b>3)) {
 			System.out.println("Coordinates should be from 1 to 3!");
 			System.out.print("Enter the coordinates:");
-	} else if (ar[Math.abs(b-3)][a-1] == '_') {
-		System.out.print("a="  + a + " b="+b);
-		ar[Math.abs(b-3)][a-1] = 'X';
+	} else if (ar[Math.abs(b-3)][a-1] == ' ') {
+		//System.out.println("a="  + a + " b="+b);
+		if (m % 2 == 0) {
+		ar[Math.abs(b-3)][a-1] = 'O';
+		//System.out.println("m=" + m);
 		q = 1;
+		m++;
+		}else {
+		ar[Math.abs(b-3)][a-1] = 'X';
+		//System.out.println("m=" + m);
+		q = 1;
+		m++;	
+		}
+		
 	} else {
 		System.out.println("This cell is occupied! Choose another one!");
 		System.out.print("Enter the coordinates:");
@@ -114,22 +127,31 @@ public class Mda11 {
 	return ar;
 }
 	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Enter cells: ");
-		String inp = scan.nextLine();
+		int m = 3;
+		int res = 0;
 		char[][] ar = new char[3][3];
-		int k = 0;
-		for(int i = 0; i <= ar.length-1; i++) {
-			for (int j = 0; j <= ar[i].length -1; j++) {
-				ar[i][j] = inp.charAt(k);
-				k++;
-			}
+		for(char[] c: ar) {
+		Arrays.fill(c, ' ');
 		}
 		printArr(ar);
-		input(ar);
-		printArr(ar);
-		//results(ar);
-	
+		while (res == 0) {
+			input(ar, m);
+			m++;
+			results(ar, res);
+			res = results(ar,res);
+			printArr(ar);;
+		}
+		switch(res) {
+		case 1:
+			System.out.print("X wins");
+			break;
+		case 2:
+			System.out.print("O wins");	
+			break;
+		case 3:
+			System.out.print("Draw");
+			break;
+		}
 	}
 
 }
