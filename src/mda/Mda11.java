@@ -137,7 +137,7 @@ public class Mda11 {
 		while (res == 0) {
 			input(ar, m);
 			m++;
-			results(ar, res);
+			//results(ar, res);
 			res = results(ar,res);
 			printArr(ar);;
 		}
