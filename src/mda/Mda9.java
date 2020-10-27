@@ -22,6 +22,7 @@ public class Mda9 {
 			s++;
 			}
 		}
+		//test2
 		for (int i = ar[a-1].length - 1; i >= 0 ; i--) {
 			if (ar[a -(k+1)][i] == 0) {
 				ar[a-(k+1)][i] = s;
