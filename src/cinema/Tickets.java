@@ -23,8 +23,8 @@ public class Tickets {
 		return ar;
 	}
 	public static void stats(char[][] ar, int price){
-		double buy = 0;
-		double count = 0;
+		int buy = 0;
+		int count = 0;
 		int priceT = 0;
 		//System.out.println("ar.length " + ar.length );
 		for (int i = 1; i <= ar.length - 1; i++){
@@ -42,7 +42,7 @@ public class Tickets {
 				if (q<60) {
 					priceT+=10;
 				} else {
-					if (i+1 <= ((ar.length - 1)/2)) {
+					if (i <= ((ar.length - 1)/2)) {
 						priceT +=10;
 					} else {
 						priceT +=8;
@@ -60,33 +60,34 @@ public class Tickets {
 	public static int Tick(char ar[][]) {
 		Scanner scan = new Scanner(System.in);
 		int q = 0;
-		int price = 0;
+		int s = 0;
 		while (q == 0) {
 		System.out.println("Enter a row number:");
 		int a1 = scan.nextInt();
 		System.out.println("Enter a seat number in that row:");
 		int b1 = scan.nextInt();
-		if ((a1 > ar.length-1 && b1 > ar[0].length-1) || ( a1 < 1 && b1 < 1)) {
+		if ((a1 > ar.length-1 || b1 > ar[0].length-1) || ( a1 < 1 && b1 < 1)) {
 			System.out.println("Wrong input!");
-			break;
+			continue;
 		} else if (ar[a1][b1] == 'B') {
 			System.out.println("That ticket has already been purchased");
-			break;
+			continue;
 		}
 		if((ar.length-1)*(ar[0].length-1) < 60) {
-			price = 10;
+			s = 10;
 			}else {
 				if (a1 <= (ar.length-1)/2) {
-					price = 10;
+					s = 10;
 				} else {
-					price = 8;
+					s = 8;
 				}
 			}
-		ar[a1][b1] = 'B';
-		System.out.printf("Ticket price: $%d\n", price);
 		q = 1;
+		ar[a1][b1] = 'B';
+		System.out.printf("Ticket price: $%d\n", s);
 		}
-		return price;
+		return s;
+
 
 	}
 	public static void chs(char[][] ar) {
@@ -105,16 +106,15 @@ public class Tickets {
 			case 1:
 				printAr(ar);
 				break;
-			case 2:
-				Tick(ar);
+				case 2:
 				price = Tick(ar);
-				priceT += Tick(ar);
+				priceT += price;
 				break;
 			case 0:
 				q = 1;
 				break;
 			case 3:
-				stats(ar, price);
+				stats(ar, priceT);
 				break;
 
 
